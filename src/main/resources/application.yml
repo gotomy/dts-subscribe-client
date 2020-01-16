@@ -1,0 +1,57 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: dts-subscribe-client
+  profiles:
+    active: development
+
+---
+spring:
+  profiles: development
+  datasource:
+    url: jdbc:mysql://localhost/subscribe_instant
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 2
+
+logging:
+  level:
+    root: info
+    com.mingdotyang.dtssubscribeclient: debug
+    org.springframework.jdbc.core.JdbcTemplate: debug
+
+
+datasync:
+  dts:
+    subscribe-instance-id: 1
+
+---
+spring:
+  profiles: testing
+
+logging:
+  level:
+    root: info
+    com.mingdotyang.dtssubscribeclient: debug
+
+---
+spring:
+  profiles: staging
+
+logging:
+  level:
+    root: info
+    com.mingdotyang.dtssubscribeclient: info
+
+---
+spring:
+  profiles: production
+
+logging:
+  level:
+    root: info
+    com.mingdotyang.dtssubscribeclient: info
